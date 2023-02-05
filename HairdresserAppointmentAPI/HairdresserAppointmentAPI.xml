@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HairdresserAppointmentAPI</name>
+    </assembly>
+    <members>
+        <member name="M:HairdresserAppointmentAPI.Controller.UserController.Login(System.String,System.String)">
+            <summary>
+            User Login Control
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
