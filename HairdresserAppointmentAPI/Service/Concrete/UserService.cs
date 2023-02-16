@@ -17,5 +17,10 @@ namespace HairdresserAppointmentAPI.Service.Concrete
         {
             return _userRepository.UserGetUserByEmailAndPassword(email, password);
         }
+        public IList<User> GetUsers()
+        {
+            return _userRepository.GetUsers();
+        }
+
     }
 }

@@ -21,16 +21,12 @@ internal class Program
         });
 
         builder.Services.AddSingleton<IUserService, UserService>();
-
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseAuthorization();
 

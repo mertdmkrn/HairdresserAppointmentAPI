@@ -16,6 +16,20 @@ namespace HairdresserAppointmentAPI.Controller
         }
 
         /// <summary>
+        /// Get All Users
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("users")]
+        public IActionResult Users()
+        {
+            ResponseModel<IList<User>> response = new ResponseModel<IList<User>>();
+            response.Data = _userService.GetUsers();
+
+            return Ok(response);
+        }
+
+        /// <summary>
         /// User Login Control
         /// </summary>
         /// <returns></returns>

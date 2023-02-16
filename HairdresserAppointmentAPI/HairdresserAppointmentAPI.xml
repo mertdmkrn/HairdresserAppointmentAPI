@@ -4,6 +4,12 @@
         <name>HairdresserAppointmentAPI</name>
     </assembly>
     <members>
+        <member name="M:HairdresserAppointmentAPI.Controller.UserController.Users">
+            <summary>
+            Get All Users
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:HairdresserAppointmentAPI.Controller.UserController.Login(System.String,System.String)">
             <summary>
             User Login Control
