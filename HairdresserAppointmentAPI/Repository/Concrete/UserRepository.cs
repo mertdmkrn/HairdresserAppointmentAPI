@@ -1,24 +1,75 @@
-﻿using HairdresserAppointmentAPI.Model;
+﻿using HairdresserAppointmentAPI.Helpers;
+using HairdresserAppointmentAPI.Model;
 using HairdresserAppointmentAPI.Repository.Abstract;
 using HairdresserAppointmentAPI.Service.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace HairdresserAppointmentAPI.Repository.Concrete
 {
     public class UserRepository : IUserRepository
     {
-        public User UserGetUserByEmailAndPassword(string email, string password)
+        /// <inheritdoc/>
+        public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
             using (var context = new AppointmentDBContext())
             {
-                return context.Users.FirstOrDefault(x=>x.userEmail.Equals(email) && x.userPassword.Equals(password));
+                return await context.Users.FirstOrDefaultAsync(x => x.email.Equals(email) && x.password.Equals(password.HashString()));
             }
         }
 
-        public IList<User> GetUsers() 
+        public async Task<User> SaveUserAsync(User user)
         {
             using (var context = new AppointmentDBContext())
             {
-                return context.Users.ToList();
+                user.password = user.password.HashString();
+                user.createDate = DateTime.Now;
+                user.updateDate = user.createDate;
+
+                if(user.fullName.IsNullOrEmpty())
+                    user.fullName = string.Join(" ", user.firstName.Trim(), user.lastName.Trim());
+
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+                return user;
+            }
+        }
+
+        public async Task<List<User>> GetUsersAsync() 
+        {
+            using (var context = new AppointmentDBContext())
+            {
+                return await context.Users.ToListAsync();
+            }
+        }
+
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            using (var context = new AppointmentDBContext())
+            {
+                user.updateDate = DateTime.Now;
+                user.fullName = string.Join(" ", user.firstName.Trim(), user.lastName.Trim());
+
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+                return user;
+            }
+        }
+
+        public User GetUserById(int id)
+        {
+            using (var context = new AppointmentDBContext())
+            {
+                return context.Users.FirstOrDefault(x => x.id == id);
+            }
+        }
+
+        public async Task<bool> DeleteUserAsync(User user)
+        {
+            using (var context = new AppointmentDBContext())
+            {
+                context.Users.Remove(user);
+                await context.SaveChangesAsync();
+                return true;
             }
         }
     }

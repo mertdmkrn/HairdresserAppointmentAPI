@@ -1,4 +1,8 @@
-﻿namespace HairdresserAppointmentAPI.Helpers
+﻿using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace HairdresserAppointmentAPI.Helpers
 {
     public static class StringExtensions
     {
@@ -11,5 +15,19 @@
         {
             return !string.IsNullOrEmpty(value);
         }
+
+        public static string HashString(this string value)
+        {
+            if (value.IsNullOrEmpty())
+            {
+                return null;
+            }
+
+            var sha = SHA256.Create();
+            var asByteArray = Encoding.Default.GetBytes(value);
+            var hashedValue = sha.ComputeHash(asByteArray);
+            return Convert.ToBase64String(hashedValue);
+        }
+
     }
 }

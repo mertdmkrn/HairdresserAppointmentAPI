@@ -3,20 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HairdresserAppointmentAPI.Model
 {
-    [Table("user")]
+    [Table("User")]
     public class User
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int userId { get; set; }
+        public int id { get; set; }
 
-        public string userFirstName { get; set; }
-        public string userLastName { get; set; }
-        public string userFullName { get; set; }
-        public string userEmail { get; set; }
-        public string userPassword { get; set; }
-        public DateTime userCreateDate { get; set; }
-        public DateTime userUpdateDate { get; set; }
-        public string userImagePath { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string? fullName { get; set; }
+        public string? email { get; set; }
+        public string? password { get; set; }
+        public DateTime? createDate { get; set; }
+        public DateTime? updateDate { get; set; }
+        public string? imagePath { get; set; }
+        public bool verified { get; set; }
 
     }
 }

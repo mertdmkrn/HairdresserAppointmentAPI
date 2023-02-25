@@ -1,4 +1,6 @@
-﻿namespace HairdresserAppointmentAPI.Helpers
+﻿using System.Net.Mail;
+
+namespace HairdresserAppointmentAPI.Helpers
 {
     public static class HelperMethods
     {
@@ -13,6 +15,20 @@
 
             return configuration;
 
+        }
+
+        public static bool IsValidEmail(this string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 }

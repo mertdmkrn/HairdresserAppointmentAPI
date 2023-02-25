@@ -10,11 +10,61 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.UserController.GetUserById(System.Int32)">
+            <summary>
+            Get User By Id
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:HairdresserAppointmentAPI.Controller.UserController.Login(System.String,System.String)">
             <summary>
             User Login Control
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.UserController.Save(HairdresserAppointmentAPI.Model.User)">
+             <summary>
+             Create New User
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "firstName": "Mert",
+                    "lastName": "DEMİRKIRAN",
+                    "email": "mertdmkrn37@gmail.com",
+                    "password": "stms5581",
+                    "imagePath": "images/mertdemirkiran.jpg"
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.UserController.Update(HairdresserAppointmentAPI.Model.User)">
+             <summary>
+             Delete User
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "id": 1,
+                    "firstName": "Mert",
+                    "lastName": "DEMİRKIRAN",
+                    "imagePath": "images/mertdemirkiran.jpg"
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.UserController.Delete(System.Int32)">
+            <summary>
+            Delete User
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Repository.Concrete.UserRepository.GetUserByEmailAndPasswordAsync(System.String,System.String)">
+            <inheritdoc/>
         </member>
     </members>
 </doc>

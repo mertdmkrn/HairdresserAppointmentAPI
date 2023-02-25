@@ -4,7 +4,11 @@ namespace HairdresserAppointmentAPI.Service.Abstract
 {
     public interface IUserService
     {
-        public User UserGetUserByEmailAndPassword(string email, string password);
-        public IList<User> GetUsers();
+        Task<User> GetUserByEmailAndPasswordAsync(string email, string password);
+        Task<List<User>> GetUsersAsync();
+        Task<User> SaveUserAsync(User user);
+        Task<User> UpdateUserAsync(User user);
+        User GetUserById(int id);
+        Task<bool> DeleteUserAsync(User user);
     }
 }

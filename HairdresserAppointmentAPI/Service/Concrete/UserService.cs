@@ -13,14 +13,33 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             _userRepository = new UserRepository();
         }
 
-        public User UserGetUserByEmailAndPassword(string email, string password)
+        public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
-            return _userRepository.UserGetUserByEmailAndPassword(email, password);
-        }
-        public IList<User> GetUsers()
-        {
-            return _userRepository.GetUsers();
+            return await _userRepository.GetUserByEmailAndPasswordAsync(email, password);
         }
 
+        public User GetUserById(int id)
+        {
+            return _userRepository.GetUserById(id);
+        }
+
+        public async Task<List<User>> GetUsersAsync()
+        {
+            return await _userRepository.GetUsersAsync();
+        }
+
+        public async Task<User> SaveUserAsync(User user)
+        {
+            return await _userRepository.SaveUserAsync(user);
+        }
+
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            return await _userRepository.UpdateUserAsync(user);
+        }
+        public async Task<bool> DeleteUserAsync(User user)
+        {
+            return await _userRepository.DeleteUserAsync(user);
+        }
     }
 }

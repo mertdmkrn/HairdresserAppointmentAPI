@@ -13,6 +13,7 @@ internal class Program
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
         builder.Services.AddSwaggerGen(c =>
         {
@@ -24,6 +25,7 @@ internal class Program
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
         var app = builder.Build();
+
 
         app.UseSwagger();
         app.UseSwaggerUI();
