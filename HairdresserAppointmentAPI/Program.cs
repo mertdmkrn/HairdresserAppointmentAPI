@@ -21,11 +21,12 @@ internal class Program
             c.IncludeXmlComments(filePath);
         });
 
-        builder.Services.AddSingleton<IUserService, UserService>();
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
+        builder.Services.AddSingleton<IBusinessRepository, BusinessRepository>();
+        builder.Services.AddSingleton<IUserService, UserService>();
+        builder.Services.AddSingleton<IBusinessService, BusinessService>();
 
         var app = builder.Build();
-
 
         app.UseSwagger();
         app.UseSwaggerUI();

@@ -8,7 +8,7 @@ namespace HairdresserAppointmentAPI.Repository.Abstract
         Task<List<User>> GetUsersAsync();
         Task<User> SaveUserAsync(User user);
         Task<User> UpdateUserAsync(User user);
-        User GetUserById(int id);
+        Task<User> GetUserById(int id);
         Task<bool> DeleteUserAsync(User user);
     }
 }

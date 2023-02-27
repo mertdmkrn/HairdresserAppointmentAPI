@@ -18,9 +18,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             return await _userRepository.GetUserByEmailAndPasswordAsync(email, password);
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return _userRepository.GetUserById(id);
+            return await _userRepository.GetUserById(id);
         }
 
         public async Task<List<User>> GetUsersAsync()

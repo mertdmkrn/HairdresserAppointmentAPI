@@ -4,6 +4,82 @@
         <name>HairdresserAppointmentAPI</name>
     </assembly>
     <members>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.Login(System.String,System.String)">
+            <summary>
+            Business Login Control
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.GetBusinessById(System.Int32)">
+            <summary>
+            Get Business By Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.GetBusinessByCountry(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get Business By Country
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.GetBusinessFindNearBy(System.Double,System.Double,System.Int32)">
+            <summary>
+            Get Business User location Find Near By
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.Save(HairdresserAppointmentAPI.Model.Business)">
+             <summary>
+             Create New Business
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "name": "Mert Güzellik Salonu",
+                    "country": "İstanbul",
+                    "province": "Kağıthane",
+                    "district": "Çeliktepe",
+                    "address": "Çeliktepe Mah. Polat Sk. No:16 D:8",
+                    "telephone": "05467335939",
+                    "email": "mertrandevuapp@gmail.com",
+                    "password": "stms5581",
+                    "latitude": 41.0821334,
+                    "longitude": 28.9957109
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.Update(HairdresserAppointmentAPI.Model.Business)">
+             <summary>
+             Update User
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "id": 1,
+                    "name": "Mert Güzellik Salonu",
+                    "country": "İstanbul",
+                    "province": "Kağıthane",
+                    "district": "Çeliktepe",
+                    "address": "Çeliktepe Mah. Polat Sk. No:16 D:8",
+                    "telephone": "05467335939",
+                    "latitude": 41.0821334,
+                    "longitude": 28.9957109,
+                    "imagePath": "images/mertguzelliksalonu.jpg"
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.Delete(System.Int32)">
+            <summary>
+            Delete Business
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:HairdresserAppointmentAPI.Controller.UserController.Users">
             <summary>
             Get All Users
@@ -42,7 +118,7 @@
         </member>
         <member name="M:HairdresserAppointmentAPI.Controller.UserController.Update(HairdresserAppointmentAPI.Model.User)">
              <summary>
-             Delete User
+             Update User
              </summary>
              <remarks>
              **Sample request body:**
@@ -62,9 +138,6 @@
             Delete User
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:HairdresserAppointmentAPI.Repository.Concrete.UserRepository.GetUserByEmailAndPasswordAsync(System.String,System.String)">
-            <inheritdoc/>
         </member>
     </members>
 </doc>

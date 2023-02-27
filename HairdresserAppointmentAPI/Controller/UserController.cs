@@ -52,7 +52,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (response.HasError)
                     return BadRequest(response);
 
-                response.Data = _userService.GetUserById(id);
+                response.Data = await _userService.GetUserById(id);
 
                 if (response.Data == null)
                 {
@@ -78,7 +78,7 @@ namespace HairdresserAppointmentAPI.Controller
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("login")]
+        [Route("user/login")]
         public async Task<IActionResult> Login(string? email, string? password)
         {
             ResponseModel<User> response = new ResponseModel<User>();
@@ -193,7 +193,7 @@ namespace HairdresserAppointmentAPI.Controller
         }
 
         /// <summary>
-        /// Delete User
+        /// Update User
         /// </summary>
         /// <remarks>
         /// **Sample request body:**
@@ -231,7 +231,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (response.HasError)
                     return BadRequest(response);
 
-                User user = _userService.GetUserById(updateUser.id);
+                User user = await _userService.GetUserById(updateUser.id);
 
                 if (user == null)
                 {
@@ -277,7 +277,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (response.HasError)
                     return BadRequest(response);
 
-                User user = _userService.GetUserById(id);
+                User user = await _userService.GetUserById(id);
 
                 if (user == null) {
                     response.HasError = true;

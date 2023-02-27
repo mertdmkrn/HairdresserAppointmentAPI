@@ -8,7 +8,6 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
 {
     public class UserRepository : IUserRepository
     {
-        /// <inheritdoc/>
         public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
             using (var context = new AppointmentDBContext())
@@ -28,7 +27,7 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
                 if(user.fullName.IsNullOrEmpty())
                     user.fullName = string.Join(" ", user.firstName.Trim(), user.lastName.Trim());
 
-                context.Users.Add(user);
+                await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();
                 return user;
             }
@@ -55,11 +54,11 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             }
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
             using (var context = new AppointmentDBContext())
             {
-                return context.Users.FirstOrDefault(x => x.id == id);
+                return await context.Users.FindAsync(id);
             }
         }
 

@@ -9,10 +9,16 @@ namespace HairdresserAppointmentAPI.Repository
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql(HelperMethods.GetConfiguration()["ConnectionStrings:AWSPostgreSQL"]);
+            optionsBuilder.UseNpgsql(HelperMethods.GetConfiguration()["ConnectionStrings:AWSPostgreSQL"], x=>x.UseNetTopologySuite());
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.HasPostgresExtension("postgis");
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Business> Businesses { get; set; }
 
     }
 }

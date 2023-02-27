@@ -16,6 +16,11 @@ namespace HairdresserAppointmentAPI.Helpers
             return !string.IsNullOrEmpty(value);
         }
 
+        public static string IsNull(this string value, string value2)
+        {
+            return value.IsNotNullOrEmpty() ? value : value2;
+        }
+
         public static string HashString(this string value)
         {
             if (value.IsNullOrEmpty())
