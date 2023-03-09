@@ -19,6 +19,8 @@ namespace HairdresserAppointmentAPI.Repository
 
         public DbSet<User> Users { get; set; }
         public DbSet<Business> Businesses { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
     }
 }

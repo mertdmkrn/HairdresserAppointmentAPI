@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.InteropServices;
+using static HairdresserAppointmentAPI.Helpers.Enums;
 
 namespace HairdresserAppointmentAPI.Model
 {
@@ -13,7 +14,7 @@ namespace HairdresserAppointmentAPI.Model
         public DateTime? createDate { get; set; }
         public DateTime? updateDate { get; set; }
         public string description { get; set; }
-        public int status { get; set; }
+        public AppointmentStatus status { get; set; }
         public int userId { get; set; }
         public int businessId { get; set; }
     }

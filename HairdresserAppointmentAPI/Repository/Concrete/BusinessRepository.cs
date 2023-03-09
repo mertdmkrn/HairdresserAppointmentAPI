@@ -3,6 +3,7 @@ using HairdresserAppointmentAPI.Model;
 using HairdresserAppointmentAPI.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing;
+using System.Linq;
 
 namespace HairdresserAppointmentAPI.Repository.Concrete
 {
@@ -16,29 +17,46 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             }
         }
 
-        public async Task<IList<Business>> GetBusinessByCountryAsync(string country, int page = 0, int take = 10)
+        public async Task<IList<Business>> GetBusinessByCountryAsync(string country, int? page, int? take)
         {
             using (var context = new AppointmentDBContext())
             {
+                if (page.HasValue && take.HasValue) {
+
+                    return await context.Businesses
+                        .Where(x => x.country.Equals(country))
+                        .OrderBy(x => x.name)
+                        .Skip(page.Value * take.Value)
+                        .Take(take.Value)
+                        .ToListAsync();
+                }
+
                 return await context.Businesses
                     .Where(x => x.country.Equals(country))
-                    .OrderBy(x=>x.name)
-                    .Skip(page * take)
-                    .Take(take)
+                    .OrderBy(x => x.name)
                     .ToListAsync();
             }
         }
 
-        public async Task<IList<Business>> GetBusinessByCountryAndProvinceAsync(string country, string province, int page = 0, int take = 10)
+        public async Task<IList<Business>> GetBusinessByCountryAndProvinceAsync(string country, string province, int? page, int? take)
         {
             using (var context = new AppointmentDBContext())
             {
-                return context.Businesses
+                if (page.HasValue && take.HasValue)
+                {
+
+                    return await context.Businesses
+                    .Where(x => x.country.Equals(country) && x.province.Equals(province))
+                        .OrderBy(x => x.name)
+                        .Skip(page.Value * take.Value)
+                        .Take(take.Value)
+                        .ToListAsync();
+                }
+
+                return await context.Businesses
                     .Where(x => x.country.Equals(country) && x.province.Equals(province))
                     .OrderBy(x => x.name)
-                    .Skip(page * take)
-                    .Take(take)
-                    .ToList();
+                    .ToListAsync();
             }
         }
 

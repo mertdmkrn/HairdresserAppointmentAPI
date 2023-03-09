@@ -16,7 +16,7 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             _businessRepository = new BusinessRepository();
         }
 
-        public async Task<IList<Business>> GetBusinessByCountryAsync(string country, int page = 0, int take = 10)
+        public async Task<IList<Business>> GetBusinessByCountryAsync(string country, int? page, int? take)
         {
             return await _businessRepository.GetBusinessByCountryAsync(country, page, take);
         }
@@ -26,7 +26,7 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             return await _businessRepository.GetBusinessByEmailAndPasswordAsync(email, password); 
         }
 
-        public async Task<IList<Business>> GetBusinessByCountryAndProvinceAsync(string country, string province, int page = 0, int take = 10)
+        public async Task<IList<Business>> GetBusinessByCountryAndProvinceAsync(string country, string province, int? page, int? take)
         {
             return await _businessRepository.GetBusinessByCountryAndProvinceAsync(country, province, page, take);
         }

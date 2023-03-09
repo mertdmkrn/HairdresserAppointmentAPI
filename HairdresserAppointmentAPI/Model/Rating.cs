@@ -9,7 +9,9 @@ namespace HairdresserAppointmentAPI.Model
         [Key]
         public int id { get; set; }
         public string comment { get; set; }
-        public decimal point { get; set; }
+        public double point { get; set; }
+        public DateTime? createDate { get; set; }
+        public DateTime? updateDate { get; set; }
         public int businessId { get; set; }
         public int userId { get; set; }
     }

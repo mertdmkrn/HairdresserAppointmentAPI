@@ -103,7 +103,7 @@ namespace HairdresserAppointmentAPI.Controller
         /// <returns></returns>
         [HttpGet]
         [Route("business/country")]
-        public async Task<IActionResult> GetBusinessByCountry(string country, int page = 0, int take = 10)
+        public async Task<IActionResult> GetBusinessByCountry(string country, int? page, int? take)
         {
             ResponseModel<IList<Business>> response = new ResponseModel<IList<Business>>();
 

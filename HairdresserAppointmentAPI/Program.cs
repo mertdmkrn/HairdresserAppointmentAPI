@@ -23,8 +23,9 @@ internal class Program
 
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
         builder.Services.AddSingleton<IBusinessRepository, BusinessRepository>();
+        builder.Services.AddSingleton<IRatingRepository, RatingRepository>();
         builder.Services.AddSingleton<IUserService, UserService>();
-        builder.Services.AddSingleton<IBusinessService, BusinessService>();
+        builder.Services.AddSingleton<IRatingService, RatingService>();
 
         var app = builder.Build();
 

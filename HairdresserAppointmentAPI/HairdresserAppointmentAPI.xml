@@ -4,6 +4,63 @@
         <name>HairdresserAppointmentAPI</name>
     </assembly>
     <members>
+        <member name="M:HairdresserAppointmentAPI.Controller.AppointmentController.GetAppointmentById(System.Int64)">
+            <summary>
+            Get Appointment By ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.AppointmentController.GetAppointmentByUserIdWithBusinessId(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get Appointment By UserId And BusinessId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.AppointmentController.GetAppointmentByUserIdWithBusinessId(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get Appointment By Date And UserId or BusinessId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.AppointmentController.Save(HairdresserAppointmentAPI.Model.Appointment)">
+             <summary>
+             Create New Appointment
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "description": "Manikür ve pedikür yaptırıcam.",
+                    "date": "2023-05-01T12:00:00",
+                    "userId": 1,
+                    "businessId": 1
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.AppointmentController.Update(HairdresserAppointmentAPI.Model.Appointment)">
+             <summary>
+             Update Appointment
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "id": 1,
+                    "description": "Oldukça nezih bir kuaför.",
+                    "status": 1
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.AppointmentController.Delete(System.Int32)">
+            <summary>
+            Delete Appointment
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.Login(System.String,System.String)">
             <summary>
             Business Login Control
@@ -16,7 +73,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.GetBusinessByCountry(System.String,System.Int32,System.Int32)">
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.GetBusinessByCountry(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Get Business By Country
             </summary>
@@ -77,6 +134,57 @@
         <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.Delete(System.Int32)">
             <summary>
             Delete Business
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.RatingController.GetRatingById(System.Int32)">
+            <summary>
+            Get Rating By ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.RatingController.GetRatingByUserIdWithBusinessId(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get Rating By UserId And BusinessId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.RatingController.Save(HairdresserAppointmentAPI.Model.Rating)">
+             <summary>
+             Create New Rating
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "comment": "Çok nezih bir kuaför",
+                    "point": 4.5,
+                    "userId": 1,
+                    "businessId": 1
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.RatingController.Update(HairdresserAppointmentAPI.Model.Rating)">
+             <summary>
+             Update Rating
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "id": 1,
+                    "comment": "Oldukça nezih bir kuaför.",
+                    "point": 4.7
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.RatingController.Delete(System.Int32)">
+            <summary>
+            Delete Rating
             </summary>
             <returns></returns>
         </member>
