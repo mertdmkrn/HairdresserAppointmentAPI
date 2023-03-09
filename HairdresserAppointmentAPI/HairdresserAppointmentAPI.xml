@@ -137,6 +137,53 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.CategoryController.GetCategoryByIdOrName(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Get Category By ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.CategoryController.GetCategories">
+            <summary>
+            Get All Categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.CategoryController.Save(HairdresserAppointmentAPI.Model.Category)">
+             <summary>
+             Create New Category
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "name": "Güzellik Salonu"
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.CategoryController.Update(HairdresserAppointmentAPI.Model.Category)">
+             <summary>
+             Update Category
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "id": 1,
+                    "name": "Güzellik ve Bakım Salonu"
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.CategoryController.Delete(System.Int32)">
+            <summary>
+            Delete Rating
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:HairdresserAppointmentAPI.Controller.RatingController.GetRatingById(System.Int32)">
             <summary>
             Get Rating By ID

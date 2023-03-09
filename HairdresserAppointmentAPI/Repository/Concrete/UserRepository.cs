@@ -12,24 +12,17 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
         {
             using (var context = new AppointmentDBContext())
             {
-                return await context.Users.FirstOrDefaultAsync(x => x.email.Equals(email) && x.password.Equals(password.HashString()));
+                return await context.Users
+                    .FirstOrDefaultAsync(x => x.email.Equals(email) && x.password.Equals(password.HashString()));
             }
         }
 
-        public async Task<User> SaveUserAsync(User user)
+        public async Task<User> GetUserById(int id)
         {
             using (var context = new AppointmentDBContext())
             {
-                user.password = user.password.HashString();
-                user.createDate = DateTime.Now;
-                user.updateDate = user.createDate;
-
-                if(user.fullName.IsNullOrEmpty())
-                    user.fullName = string.Join(" ", user.firstName.Trim(), user.lastName.Trim());
-
-                await context.Users.AddAsync(user);
-                await context.SaveChangesAsync();
-                return user;
+                return await context.Users
+                    .FindAsync(id);
             }
         }
 
@@ -37,7 +30,8 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
         {
             using (var context = new AppointmentDBContext())
             {
-                return await context.Users.ToListAsync();
+                return await context.Users
+                    .ToListAsync();
             }
         }
 
@@ -54,11 +48,20 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             }
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> SaveUserAsync(User user)
         {
             using (var context = new AppointmentDBContext())
             {
-                return await context.Users.FindAsync(id);
+                user.password = user.password.HashString();
+                user.createDate = DateTime.Now;
+                user.updateDate = user.createDate;
+
+                if (user.fullName.IsNullOrEmpty())
+                    user.fullName = string.Join(" ", user.firstName.Trim(), user.lastName.Trim());
+
+                await context.Users.AddAsync(user);
+                await context.SaveChangesAsync();
+                return user;
             }
         }
 

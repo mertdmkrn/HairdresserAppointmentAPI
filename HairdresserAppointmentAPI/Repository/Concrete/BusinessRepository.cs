@@ -13,7 +13,8 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
         {
             using (var context = new AppointmentDBContext())
             {
-                return await context.Businesses.FirstOrDefaultAsync(x => x.email.Equals(email) && x.password.Equals(password.HashString()));
+                return await context.Businesses
+                    .FirstOrDefaultAsync(x => x.email.Equals(email) && x.password.Equals(password.HashString()));
             }
         }
 

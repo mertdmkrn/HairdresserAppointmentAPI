@@ -10,7 +10,8 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
         {
             using (var context = new AppointmentDBContext())
             {
-                return await context.Ratings.FindAsync(id);
+                return await context.Ratings
+                    .FindAsync(id);
             }
         }
 
@@ -18,7 +19,9 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
         {
             using (var context = new AppointmentDBContext())
             {
-                return await context.Ratings.Where(x => x.businessId == businessId).ToListAsync();
+                return await context.Ratings
+                    .Where(x => x.businessId == businessId)
+                    .ToListAsync();
             }
         }     
         
@@ -26,7 +29,9 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
         {
             using (var context = new AppointmentDBContext())
             {
-                return await context.Ratings.Where(x => x.userId == userId).ToListAsync();
+                return await context.Ratings
+                    .Where(x => x.userId == userId)
+                    .ToListAsync();
             }
         }
              
@@ -34,7 +39,9 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
         {
             using (var context = new AppointmentDBContext())
             {
-                return await context.Ratings.Where(x => x.userId == userId && x.businessId == businessId).ToListAsync();
+                return await context.Ratings
+                    .Where(x => x.userId == userId && x.businessId == businessId)
+                    .ToListAsync();
             }
         }
 
