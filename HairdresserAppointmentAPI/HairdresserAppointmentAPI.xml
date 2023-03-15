@@ -73,9 +73,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.GetBusinessByCountry(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.GetBusinessBySearch(HairdresserAppointmentAPI.Model.SearchModel.BusinessSearchModel)">
             <summary>
-            Get Business By Country
+            Get Business Search
             </summary>
             <returns></returns>
         </member>
@@ -94,7 +94,7 @@
             
                  { 
                     "name": "Mert Güzellik Salonu",
-                    "country": "İstanbul",
+                    "city": "İstanbul",
                     "province": "Kağıthane",
                     "district": "Çeliktepe",
                     "address": "Çeliktepe Mah. Polat Sk. No:16 D:8",
@@ -118,7 +118,7 @@
                  { 
                     "id": 1,
                     "name": "Mert Güzellik Salonu",
-                    "country": "İstanbul",
+                    "city": "İstanbul",
                     "province": "Kağıthane",
                     "district": "Çeliktepe",
                     "address": "Çeliktepe Mah. Polat Sk. No:16 D:8",

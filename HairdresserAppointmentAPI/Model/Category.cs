@@ -9,5 +9,7 @@ namespace HairdresserAppointmentAPI.Model
         [Key]
         public int id { get; set; }
         public string name { get; set; }
+        public virtual ICollection<BusinessCategory> categories { get; set; }
+
     }
 }

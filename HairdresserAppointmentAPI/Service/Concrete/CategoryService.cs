@@ -2,8 +2,6 @@
 using HairdresserAppointmentAPI.Repository.Abstract;
 using HairdresserAppointmentAPI.Repository.Concrete;
 using HairdresserAppointmentAPI.Service.Abstract;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics.Metrics;
 
 namespace HairdresserAppointmentAPI.Service.Concrete
 {

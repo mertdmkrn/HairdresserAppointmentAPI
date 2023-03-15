@@ -1,4 +1,5 @@
 ﻿using HairdresserAppointmentAPI.Model;
+using HairdresserAppointmentAPI.Model.CustomModel;
 using HairdresserAppointmentAPI.Repository.Abstract;
 using HairdresserAppointmentAPI.Repository.Concrete;
 using HairdresserAppointmentAPI.Service.Abstract;
@@ -16,9 +17,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             _businessRepository = new BusinessRepository();
         }
 
-        public async Task<IList<Business>> GetBusinessByCountryAsync(string country, int? page, int? take)
+        public async Task<IList<BusinessListModel>> GetBusinessByCityAsync(string city, double? latitude, double? longitude, int? page, int? take)
         {
-            return await _businessRepository.GetBusinessByCountryAsync(country, page, take);
+            return await _businessRepository.GetBusinessByCityAsync(city, latitude, longitude, page, take);
         }
 
         public async Task<Business> GetBusinessByEmailAndPasswordAsync(string email, string password)
@@ -26,9 +27,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             return await _businessRepository.GetBusinessByEmailAndPasswordAsync(email, password); 
         }
 
-        public async Task<IList<Business>> GetBusinessByCountryAndProvinceAsync(string country, string province, int? page, int? take)
+        public async Task<IList<BusinessListModel>> GetBusinessByCityAndProvinceAsync(string city, string province, double? latitude, double? longitude, int? page, int? take)
         {
-            return await _businessRepository.GetBusinessByCountryAndProvinceAsync(country, province, page, take);
+            return await _businessRepository.GetBusinessByCityAndProvinceAsync(city, province, latitude, longitude, page, take);
         }
 
         public async Task<Business> GetBusinessByIdAsync(int id)
@@ -36,7 +37,7 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             return await _businessRepository.GetBusinessByIdAsync(id);
         }
 
-        public async Task<IList<Business>> GetBusinessNearByDistanceAsync(double latitude, double longitude, int metre)
+        public async Task<IList<BusinessListModel>> GetBusinessNearByDistanceAsync(double latitude, double longitude, int metre)
         {
             return await _businessRepository.GetBusinessNearByDistanceAsync(latitude, longitude, metre); 
         }

@@ -1,8 +1,9 @@
 ﻿using HairdresserAppointmentAPI.Helpers;
 using HairdresserAppointmentAPI.Model;
+using HairdresserAppointmentAPI.Model.CustomModel;
 using HairdresserAppointmentAPI.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing;
+using NetTopologySuite.Geometries;
 using System.Linq;
 
 namespace HairdresserAppointmentAPI.Repository.Concrete
@@ -18,45 +19,117 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             }
         }
 
-        public async Task<IList<Business>> GetBusinessByCountryAsync(string country, int? page, int? take)
+        public async Task<IList<BusinessListModel>> GetBusinessByCityAsync(string city, double? latitude, double? longitude, int? page, int? take)
         {
             using (var context = new AppointmentDBContext())
             {
-                if (page.HasValue && take.HasValue) {
+                Point? userLocation = null;
+                var gf = NetTopologySuite.NtsGeometryServices.Instance.CreateGeometryFactory(4326);
 
+                if (latitude.HasValue && longitude.HasValue)
+                {
+                    userLocation = gf.CreatePoint(new Coordinate(latitude.Value, longitude.Value));
+                }
+
+                if (page.HasValue && take.HasValue)
+                {
                     return await context.Businesses
-                        .Where(x => x.country.Equals(country))
-                        .OrderBy(x => x.name)
+                        .Include(x => x.ratings)
+                        .Include(x => x.galleries)
+                        .Where(x => x.city.Equals(city))
+                        .Select(x => new BusinessListModel
+                        {
+                            id = x.id,
+                            name = x.name,
+                            city = x.city,
+                            province = x.province,
+                            imagePath = x.galleries.FirstOrDefault(x => x.size == Constants.ImageSizes.BusinessListImageSize).imagePath,
+                            averageRating = x.ratings.Average(x => x.point),
+                            countRating = x.ratings.Count(),
+                            distance = userLocation != null ? x.location.Distance(gf.CreateGeometry(userLocation)) : 0
+                        })
+                        .OrderBy(x => x.distance)
+                        .ThenBy(x => x.averageRating)
                         .Skip(page.Value * take.Value)
                         .Take(take.Value)
                         .ToListAsync();
                 }
 
                 return await context.Businesses
-                    .Where(x => x.country.Equals(country))
-                    .OrderBy(x => x.name)
+                    .Include(x => x.ratings)
+                    .Include(x => x.galleries)
+                    .Where(x => x.city.Equals(city))
+                    .Select(x => new BusinessListModel
+                    {
+                        id = x.id,
+                        name = x.name,
+                        city = x.city,
+                        province = x.province,
+                        imagePath = x.galleries.FirstOrDefault(x => x.size == Constants.ImageSizes.BusinessListImageSize).imagePath,
+                        averageRating = x.ratings.Average(x => x.point),
+                        countRating = x.ratings.Count(),
+                        distance = userLocation != null ? x.location.Distance(gf.CreateGeometry(userLocation)) : 0
+                    })
+                    .OrderBy(x => x.distance)
+                    .ThenBy(x => x.averageRating)
                     .ToListAsync();
             }
         }
 
-        public async Task<IList<Business>> GetBusinessByCountryAndProvinceAsync(string country, string province, int? page, int? take)
+        public async Task<IList<BusinessListModel>> GetBusinessByCityAndProvinceAsync(string city, string province, double? latitude, double? longitude, int? page, int? take)
         {
             using (var context = new AppointmentDBContext())
             {
+                Point? userLocation = null;
+                var gf = NetTopologySuite.NtsGeometryServices.Instance.CreateGeometryFactory(4326);
+
+                if (latitude.HasValue && longitude.HasValue)
+                {
+                    userLocation = gf.CreatePoint(new Coordinate(latitude.Value, longitude.Value));
+                }
+
                 if (page.HasValue && take.HasValue)
                 {
 
                     return await context.Businesses
-                    .Where(x => x.country.Equals(country) && x.province.Equals(province))
-                        .OrderBy(x => x.name)
+                        .Include(x => x.ratings)
+                        .Include(x => x.galleries)
+                        .Where(x => x.city.Equals(city) && x.province.Equals(province))
+                        .Select(x => new BusinessListModel
+                        {
+                            id = x.id,
+                            name = x.name,
+                            city = x.city,
+                            province = x.province,
+                            imagePath = x.galleries.FirstOrDefault(x => x.size == Constants.ImageSizes.BusinessListImageSize).imagePath,
+                            averageRating = x.ratings.Average(x => x.point),
+                            countRating = x.ratings.Count(),
+                            distance = userLocation != null ? x.location.Distance(gf.CreateGeometry(userLocation)) : 0
+                        })
+                        .OrderBy(x => x.distance)
+                        .ThenBy(x => x.averageRating)
                         .Skip(page.Value * take.Value)
                         .Take(take.Value)
                         .ToListAsync();
                 }
 
                 return await context.Businesses
-                    .Where(x => x.country.Equals(country) && x.province.Equals(province))
-                    .OrderBy(x => x.name)
+                    .Include(x => x.ratings)
+                    .Include(x => x.galleries)
+                    .Where(x => x.city.Equals(city) && x.province.Equals(province))
+                    .Select(x => new BusinessListModel
+                    {
+                        id = x.id,
+                        name = x.name,
+                        city = x.city,
+                        province = x.province,
+                        imagePath = x.galleries.FirstOrDefault(x => x.size == Constants.ImageSizes.BusinessListImageSize).imagePath,
+                        averageRating = x.ratings.Average(x => x.point),
+                        countRating = x.ratings.Count(),
+                        distance = userLocation != null ? x.location.Distance(gf.CreateGeometry(userLocation)) : 0
+                    })
+                    .OrderBy(x => x.distance)
+                    .ThenBy(x => x.averageRating)
                     .ToListAsync();
             }
         }
@@ -69,7 +142,7 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             }
         }
 
-        public async Task<IList<Business>> GetBusinessNearByDistanceAsync(double latitude, double longitude, int metre)
+        public async Task<IList<BusinessListModel>> GetBusinessNearByDistanceAsync(double latitude, double longitude, int metre)
         {
             using (var context = new AppointmentDBContext())
             {
@@ -77,8 +150,21 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
                 var userLocation = gf.CreatePoint(new NetTopologySuite.Geometries.Coordinate(latitude, longitude));
 
                 return await context.Businesses
+                    .Include(x => x.ratings)
+                    .Include(x => x.galleries)
                     .Where(x => x.location.IsWithinDistance(gf.CreateGeometry(userLocation), metre))
-                    .OrderBy (x => x.location.Distance(gf.CreateGeometry(userLocation)))
+                    .Select(x => new BusinessListModel
+                    {
+                        id = x.id,
+                        name = x.name,
+                        city = x.city,
+                        province = x.province,
+                        imagePath = x.galleries.FirstOrDefault(x => x.size == Constants.ImageSizes.BusinessListImageSize).imagePath,
+                        averageRating = x.ratings.Average(x => x.point),
+                        countRating = x.ratings.Count(),
+                        distance = userLocation != null ? x.location.Distance(gf.CreateGeometry(userLocation)) : 0
+                    })
+                    .OrderBy(x => x.distance)
                     .ToListAsync();
             }
         }

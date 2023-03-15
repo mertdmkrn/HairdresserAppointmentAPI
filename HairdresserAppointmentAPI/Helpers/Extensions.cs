@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HairdresserAppointmentAPI.Helpers
 {
-    public static class StringExtensions
+    public static class Extensions
     {
         public static bool IsNullOrEmpty(this string value)
         {
@@ -34,5 +34,9 @@ namespace HairdresserAppointmentAPI.Helpers
             return Convert.ToBase64String(hashedValue);
         }
 
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> target)
+        {
+            return !(target != null && target.Count() > 0);
+        }
     }
 }

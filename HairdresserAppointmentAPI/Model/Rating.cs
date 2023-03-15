@@ -14,5 +14,7 @@ namespace HairdresserAppointmentAPI.Model
         public DateTime? updateDate { get; set; }
         public int businessId { get; set; }
         public int userId { get; set; }
+        public Business business { get; set; }
+
     }
 }

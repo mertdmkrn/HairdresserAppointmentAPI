@@ -1,5 +1,7 @@
 ﻿using HairdresserAppointmentAPI.Helpers;
 using HairdresserAppointmentAPI.Model;
+using HairdresserAppointmentAPI.Model.CustomModel;
+using HairdresserAppointmentAPI.Model.SearchModel;
 using HairdresserAppointmentAPI.Service.Abstract;
 using HairdresserAppointmentAPI.Service.Concrete;
 using Microsoft.AspNetCore.Mvc;
@@ -98,33 +100,36 @@ namespace HairdresserAppointmentAPI.Controller
         }
 
         /// <summary>
-        /// Get Business By Country
+        /// Get Business Search
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("business/country")]
-        public async Task<IActionResult> GetBusinessByCountry(string country, int? page, int? take)
+        [Route("business/search")]
+        public async Task<IActionResult> GetBusinessBySearch([FromQuery] BusinessSearchModel businessSearchModel)
         {
-            ResponseModel<IList<Business>> response = new ResponseModel<IList<Business>>();
+            ResponseModel<IList<BusinessListModel>> response = new ResponseModel<IList<BusinessListModel>>();
 
             try
             {
-                if (country.IsNullOrEmpty())
+                if (businessSearchModel.City.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("country", "Country parametresi boş olmalı.");
-                    response.Message += "Id parametresi 0' dan büyük olmalı.";
+                    response.ValidationErrors.Add("city", "City parametresi boş olmalı.");
+                    response.Message += "City parametresi boş olmalı.";
                 }
 
                 if (response.HasError)
                     return BadRequest(response);
 
-                response.Data = await _businessService.GetBusinessByCountryAsync(country, page, take);
+                if(!businessSearchModel.Province.IsNullOrEmpty())
+                    response.Data = await _businessService.GetBusinessByCityAndProvinceAsync(businessSearchModel.City, businessSearchModel.Province, businessSearchModel.Latitude, businessSearchModel.Longitude, businessSearchModel.Page, businessSearchModel.Take);
+                else
+                    response.Data = await _businessService.GetBusinessByCityAsync(businessSearchModel.City, businessSearchModel.Latitude, businessSearchModel.Longitude, businessSearchModel.Page, businessSearchModel.Take);
 
                 if (response.Data == null || response.Data.Count == 0)
                 {
                     response.HasError = true;
-                    response.Message += country + " şehrinde işletme bulunamadı.";
+                    response.Message += businessSearchModel.City + " şehrinde " + (!businessSearchModel.Province.IsNullOrEmpty() ? businessSearchModel.Province + " ilçesinde" : string.Empty) + " işletme bulunamadı.";
                     return NotFound(response);
                 }
 
@@ -147,7 +152,7 @@ namespace HairdresserAppointmentAPI.Controller
         [Route("business/findnearby")]
         public async Task<IActionResult> GetBusinessFindNearBy(double latitude, double longitude, int distance)
         {
-            ResponseModel<IList<Business>> response = new ResponseModel<IList<Business>>();
+            ResponseModel<IList<BusinessListModel>> response = new ResponseModel<IList<BusinessListModel>>();
 
             try
             {
@@ -203,7 +208,7 @@ namespace HairdresserAppointmentAPI.Controller
         ///
         ///     { 
         ///        "name": "Mert Güzellik Salonu",
-        ///        "country": "İstanbul",
+        ///        "city": "İstanbul",
         ///        "province": "Kağıthane",
         ///        "district": "Çeliktepe",
         ///        "address": "Çeliktepe Mah. Polat Sk. No:16 D:8",
@@ -282,7 +287,7 @@ namespace HairdresserAppointmentAPI.Controller
         ///     { 
         ///        "id": 1,
         ///        "name": "Mert Güzellik Salonu",
-        ///        "country": "İstanbul",
+        ///        "city": "İstanbul",
         ///        "province": "Kağıthane",
         ///        "district": "Çeliktepe",
         ///        "address": "Çeliktepe Mah. Polat Sk. No:16 D:8",
@@ -320,13 +325,11 @@ namespace HairdresserAppointmentAPI.Controller
                     return NotFound(response);
                 }
 
-                business.imagePath = updateBusiness.imagePath;
                 business.name = updateBusiness.name.IsNull(business.name);
-                business.country = updateBusiness.country.IsNull(business.country);
+                business.city = updateBusiness.city.IsNull(business.city);
                 business.province = updateBusiness.province.IsNull(business.province);
                 business.district = updateBusiness.district.IsNull(business.district);
                 business.address = updateBusiness.address.IsNull(business.address);
-                business.imagePath = updateBusiness.imagePath.IsNull(business.imagePath);
                 business.latitude = updateBusiness.latitude == 0 ? business.latitude : updateBusiness.latitude;
                 business.longitude = updateBusiness.longitude == 0 ? business.longitude : updateBusiness.longitude;
                 var gf = NetTopologySuite.NtsGeometryServices.Instance.CreateGeometryFactory(4326);
