@@ -43,5 +43,10 @@ namespace HairdresserAppointmentAPI.Service.Concrete
         {
             return await _businessCategoryRepository.DeleteBusinessCategoryAsync(businessCategory);
         }
+
+        public async Task<bool> DeleteBusinessCategoriesAsync(IList<BusinessCategory> businessCategories)
+        {
+            return await _businessCategoryRepository.DeleteBusinessCategoriesAsync(businessCategories);
+        }
     }
 }

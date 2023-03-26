@@ -16,6 +16,8 @@ namespace HairdresserAppointmentAPI.Model
             this.services = new HashSet<Services>();
             this.categories = new HashSet<BusinessCategory>();
             this.galleries = new HashSet<BusinessGallery>();
+            this.workingInfos = new HashSet<BusinessWorkingInfo>();
+            this.appointments = new HashSet<Appointment>();
         }
 
 
@@ -48,5 +50,7 @@ namespace HairdresserAppointmentAPI.Model
         public virtual ICollection<BusinessGallery> galleries { get; set; }
         public virtual ICollection<Services> services { get; set; }
         public virtual ICollection<BusinessCategory> categories { get; set; }
+        public virtual ICollection<BusinessWorkingInfo> workingInfos { get; set; }
+        public virtual ICollection<Appointment> appointments { get; set; }
     }
 }

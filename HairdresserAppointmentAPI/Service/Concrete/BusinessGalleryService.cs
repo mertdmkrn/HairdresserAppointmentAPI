@@ -14,12 +14,12 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             _businessGalleryRepository = new BusinessGalleryRepository();
         }
 
-        public async Task<bool> DeleteBusinessCategoryAsync(BusinessGallery businessGallery)
+        public async Task<bool> DeleteBusinessGalleryAsync(BusinessGallery businessGallery)
         {
-            return await _businessGalleryRepository.DeleteBusinessCategoryAsync(businessGallery);
+            return await _businessGalleryRepository.DeleteBusinessGalleryAsync(businessGallery);
         }
 
-        public async Task<bool> DeleteBusinessGalleriesAsync(List<BusinessGallery> businessGalleries)
+        public async Task<bool> DeleteBusinessGalleriesAsync(IList<BusinessGallery> businessGalleries)
         {
             return await _businessGalleryRepository.DeleteBusinessGalleriesAsync(businessGalleries);
         }

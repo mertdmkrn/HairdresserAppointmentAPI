@@ -61,9 +61,42 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HairdresserAppointmentAPI.Controller.BusinessController.Login(System.String,System.String)">
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessCategoryController.GetBusinessCategoryById(System.Int32)">
             <summary>
-            Business Login Control
+            Get BusinessCategory By ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessCategoryController.GetBusinessCategoryByBusinessId(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get BusinessCategory By BusinessId Or CategoryId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessCategoryController.Save(HairdresserAppointmentAPI.Model.BusinessCategory)">
+             <summary>
+             Create New BusinessCategory
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "categoryId": 1,
+                    "businessId": 1
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessCategoryController.Delete(System.Int32)">
+            <summary>
+            Delete BusinessCategory
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessCategoryController.DeleteByBusinessId(System.Int32)">
+            <summary>
+            Delete BusinessCategory By BusinessId
             </summary>
             <returns></returns>
         </member>
@@ -137,6 +170,171 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessGalleryController.GetBusinessGalleryById(System.Int32)">
+            <summary>
+            Get BusinessGallery By ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessGalleryController.GetBusinessGalleryByBusinessId(System.Int32,System.String)">
+            <summary>
+            Get BusinessGallery By BusinessId And Size
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessGalleryController.Save(HairdresserAppointmentAPI.Model.BusinessGallery)">
+             <summary>
+             Create New BusinessGallery
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "imagePath": "https://randevufiles/guzellik.png",
+                    "size": "300x250",
+                    "businessId": 1
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessGalleryController.SaveList(System.Collections.Generic.List{HairdresserAppointmentAPI.Model.BusinessGallery},System.Int32)">
+             <summary>
+             Create New BusinessGalleries
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+             [
+                 { 
+                    "imagePath": "https://randevufiles/guzellik1.png",
+                    "size": "300x250"
+                 },
+                 { 
+                    "imagePath": "https://randevufiles/guzellik2.png",
+                    "size": "960x720"
+                 },
+                 { 
+                    "imagePath": "https://randevufiles/guzellik3.png",
+                    "size": "1200x720"
+                 }
+             ]
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessGalleryController.Update(HairdresserAppointmentAPI.Model.BusinessGallery)">
+             <summary>
+             Update BusinessGallery
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "id": 1,
+                    "imagePath": "https://randevufiles/guzellik4.png",
+                    "size": "1200x900"
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessGalleryController.Delete(System.Int32)">
+            <summary>
+            Delete BusinessGallery
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessGalleryController.DeleteByBusinessId(System.Int32)">
+            <summary>
+            Delete BusinessGallery By BusinessId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessWorkingInfoController.GetBusinessWorkingInfoById(System.Int32)">
+            <summary>
+            Get BusinessWorkingInfo By ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessWorkingInfoController.GetBusinessWorkingInfoByBusinessId(System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get BusinessWorkingInfo By BusinessId, StartDate, End Date
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessWorkingInfoController.Save(HairdresserAppointmentAPI.Model.BusinessWorkingInfo)">
+             <summary>
+             Create New BusinessWorkingInfo
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "date": "2023-03-21",
+                    "startHour": "08:30",
+                    "endHour": "21:30",
+                    "appointmentTimeInterval": 60,
+                    "appointmentPeopleCount": 10,
+                    "businessId": 1
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessWorkingInfoController.SaveByBusinessId(System.Collections.Generic.List{HairdresserAppointmentAPI.Model.BusinessWorkingInfo},System.Nullable{System.Int32})">
+             <summary>
+             Create New BusinessWorkingInfo List
+             </summary>
+             <remarks>
+             **Sample request body:**
+                 
+                 [
+                     { 
+                         "date": "2023-03-21",
+                         "startHour": "08:30",
+                         "endHour": "21:30",
+                         "appointmentTimeInterval": 60,
+                         "appointmentPeopleCount": 10
+                     },
+                     { 
+                         "date": "2023-03-22",
+                         "startHour": "08:30",
+                         "endHour": "21:30",
+                         "appointmentTimeInterval": 60,
+                         "appointmentPeopleCount": 10
+                     },
+                     { 
+                         "date": "2023-03-22",
+                         "startHour": "08:30",
+                         "endHour": "21:30",
+                         "appointmentTimeInterval": 60,
+                         "appointmentPeopleCount": 10
+                     }
+                 ]
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.BusinessWorkingInfoController.Update(HairdresserAppointmentAPI.Model.BusinessWorkingInfo)">
+             <summary>
+             Update BusinessWorkingInfo
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 {
+                    "id": 1,
+                    "date": "2023-03-21",
+                    "startHour": "08:30",
+                    "endHour": "21:30",
+                    "appointmentTimeInterval": 60,
+                    "appointmentPeopleCount": 10,
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
         <member name="M:HairdresserAppointmentAPI.Controller.CategoryController.GetCategoryByIdOrName(System.Nullable{System.Int32},System.String)">
             <summary>
             Get Category By ID
@@ -180,9 +378,45 @@
         </member>
         <member name="M:HairdresserAppointmentAPI.Controller.CategoryController.Delete(System.Int32)">
             <summary>
-            Delete Rating
+            Delete Category
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.LoginController.UserLogin(System.String,System.String)">
+            <summary>
+            User Login Control
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.LoginController.BusinessLogin(System.String,System.String)">
+            <summary>
+            Business Login Control
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.LoginController.UserConfirm(System.String)">
+            <summary>
+            User Confirm
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.LoginController.Save(HairdresserAppointmentAPI.Model.User)">
+             <summary>
+             Create New User
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "firstName": "Mert",
+                    "lastName": "DEMİRKIRAN",
+                    "email": "mertdmkrn37@gmail.com",
+                    "password": "stms5581",
+                    "imagePath": "images/mertdemirkiran.jpg"
+                 }
+            
+             </remarks>
+             <returns></returns>
         </member>
         <member name="M:HairdresserAppointmentAPI.Controller.RatingController.GetRatingById(System.Int32)">
             <summary>
@@ -235,6 +469,87 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.ServicesController.GetServicesById(System.Int32)">
+            <summary>
+            Get Services By ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.ServicesController.GetServicesByBusinessId(System.Int32)">
+            <summary>
+            Get Services By BusinessId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.ServicesController.Save(HairdresserAppointmentAPI.Model.Services)">
+             <summary>
+             Create New Service
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "name": "Ombre",
+                    "price": 100,
+                    "businessId": 1
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.ServicesController.SaveList(System.Collections.Generic.List{HairdresserAppointmentAPI.Model.Services},System.Int32)">
+             <summary>
+             Create New Services
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+             [
+                 { 
+                     "name": "Saç Kesim",
+                     "price": 100
+                 },
+                 { 
+                     "name": "Saç Boyama",
+                     "price": 150
+                 },
+                 { 
+                     "name": "Fön",
+                     "price": 50
+                 }
+             ]
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.ServicesController.Update(HairdresserAppointmentAPI.Model.Services)">
+             <summary>
+             Update Service
+             </summary>
+             <remarks>
+             **Sample request body:**
+            
+                 { 
+                    "id": 1,
+                    "name": "Saç Kesimi",
+                    "price": "120"
+                 }
+            
+             </remarks>
+             <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.ServicesController.Delete(System.Int32)">
+            <summary>
+            Delete Service
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Controller.ServicesController.DeleteByBusinessId(System.Int32)">
+            <summary>
+            Delete Service By BusinessId
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:HairdresserAppointmentAPI.Controller.UserController.Users">
             <summary>
             Get All Users
@@ -246,30 +561,6 @@
             Get User By Id
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:HairdresserAppointmentAPI.Controller.UserController.Login(System.String,System.String)">
-            <summary>
-            User Login Control
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HairdresserAppointmentAPI.Controller.UserController.Save(HairdresserAppointmentAPI.Model.User)">
-             <summary>
-             Create New User
-             </summary>
-             <remarks>
-             **Sample request body:**
-            
-                 { 
-                    "firstName": "Mert",
-                    "lastName": "DEMİRKIRAN",
-                    "email": "mertdmkrn37@gmail.com",
-                    "password": "stms5581",
-                    "imagePath": "images/mertdemirkiran.jpg"
-                 }
-            
-             </remarks>
-             <returns></returns>
         </member>
         <member name="M:HairdresserAppointmentAPI.Controller.UserController.Update(HairdresserAppointmentAPI.Model.User)">
              <summary>

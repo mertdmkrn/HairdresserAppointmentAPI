@@ -64,5 +64,15 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
                 return true;
             }
         }
+
+        public async Task<bool> DeleteBusinessCategoriesAsync(IList<BusinessCategory> businessCategories)
+        {
+            using (var context = new AppointmentDBContext())
+            {
+                context.BusinessCategories.RemoveRange(businessCategories);
+                await context.SaveChangesAsync();
+                return true;
+            }
+        }
     }
 }

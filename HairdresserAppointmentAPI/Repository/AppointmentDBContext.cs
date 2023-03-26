@@ -147,6 +147,13 @@ namespace HairdresserAppointmentAPI.Repository
                 entity.Property(e => e.status);
                 entity.Property(e => e.userId);
                 entity.Property(e => e.businessId);
+
+
+                entity.HasOne(d => d.business)
+                .WithMany(p => p.appointments)
+                .HasForeignKey(d => d.businessId)
+                .HasConstraintName("BusinessFK")
+                .OnDelete(DeleteBehavior.SetNull);
             });
 
             builder.Entity<BusinessCategory>(entity =>
@@ -202,6 +209,12 @@ namespace HairdresserAppointmentAPI.Repository
                 entity.Property(e => e.appointmentTimeInterval);
                 entity.Property(e => e.appointmentPeopleCount);
                 entity.Property(e => e.businessId);
+
+                entity.HasOne(d => d.business)
+                .WithMany(p => p.workingInfos)
+                .HasForeignKey(d => d.businessId)
+                .HasConstraintName("BusinessFK")
+                .OnDelete(DeleteBehavior.Cascade);
             });
         }
 

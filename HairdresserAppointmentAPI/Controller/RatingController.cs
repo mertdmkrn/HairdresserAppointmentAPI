@@ -2,11 +2,13 @@
 using HairdresserAppointmentAPI.Model;
 using HairdresserAppointmentAPI.Service.Abstract;
 using HairdresserAppointmentAPI.Service.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HairdresserAppointmentAPI.Controller
 {
     [ApiController]
+    [Authorize]
     public class RatingController : ControllerBase
     {
         private IRatingService _ratingService;
@@ -239,7 +241,7 @@ namespace HairdresserAppointmentAPI.Controller
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        [Route("rating/delete/{id}")]
+        [Route("rating/delete")]
         public async Task<IActionResult> Delete(int id)
         {
             ResponseModel<bool> response = new ResponseModel<bool>();

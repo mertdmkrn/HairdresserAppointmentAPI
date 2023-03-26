@@ -2,11 +2,13 @@
 using HairdresserAppointmentAPI.Model;
 using HairdresserAppointmentAPI.Service.Abstract;
 using HairdresserAppointmentAPI.Service.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HairdresserAppointmentAPI.Controller
 {
     [ApiController]
+    [Authorize]
     public class AppointmentController : ControllerBase
     {
         private IAppointmentService _appointmentService;
@@ -259,7 +261,7 @@ namespace HairdresserAppointmentAPI.Controller
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        [Route("appointment/delete/{id}")]
+        [Route("appointment/delete")]
         public async Task<IActionResult> Delete(int id)
         {
             ResponseModel<bool> response = new ResponseModel<bool>();

@@ -14,5 +14,6 @@ namespace HairdresserAppointmentAPI.Model
         public int appointmentTimeInterval { get; set; }
         public int appointmentPeopleCount { get; set; }
         public int businessId { get; set; }
+        public Business? business { get; set; }
     }
 }

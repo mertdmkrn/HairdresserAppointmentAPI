@@ -38,5 +38,20 @@ namespace HairdresserAppointmentAPI.Helpers
         {
             return !(target != null && target.Count() > 0);
         }
+
+        public static int ToInt(this string number, int defaultInt = 0)
+        {
+            int resultNum = defaultInt;
+            try
+            {
+                if (!string.IsNullOrEmpty(number))
+                    resultNum = Convert.ToInt32(number);
+            }
+            catch
+            {
+            }
+
+            return resultNum;
+        }
     }
 }

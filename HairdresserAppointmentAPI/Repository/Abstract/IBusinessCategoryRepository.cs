@@ -10,5 +10,6 @@ namespace HairdresserAppointmentAPI.Repository.Abstract
         Task<BusinessCategory> SaveBusinessCategoryAsync(BusinessCategory businessCategory);
         Task<BusinessCategory> UpdateBusinessCategoryAsync(BusinessCategory businessCategory);
         Task<bool> DeleteBusinessCategoryAsync(BusinessCategory businessCategory);
+        Task<bool> DeleteBusinessCategoriesAsync(IList<BusinessCategory> businessCategories);
     }
 }

@@ -29,7 +29,7 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             return await _businessWorkingInfoRepository.GetBusinessWorkingInfoByBusinessIdAsync(businessId);
         }
 
-        public async Task<BusinessWorkingInfo> GetBusinessWorkingInfoByIdAsync(int id)
+        public async Task<BusinessWorkingInfo> GetBusinessWorkingInfoByIdAsync(long id)
         {
             return await _businessWorkingInfoRepository.GetBusinessWorkingInfoByIdAsync(id);
         }

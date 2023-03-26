@@ -67,7 +67,7 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             }
         }
 
-        public async Task<bool> DeleteServicesListAsync(List<Services> servicesList)
+        public async Task<bool> DeleteServicesListAsync(IList<Services> servicesList)
         {
             using (var context = new AppointmentDBContext())
             {

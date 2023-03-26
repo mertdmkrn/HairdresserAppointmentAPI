@@ -4,7 +4,7 @@ namespace HairdresserAppointmentAPI.Repository.Abstract
 {
     public interface IBusinessWorkingInfoRepository
     {
-        Task<BusinessWorkingInfo> GetBusinessWorkingInfoByIdAsync(int id);
+        Task<BusinessWorkingInfo> GetBusinessWorkingInfoByIdAsync(long id);
         Task<IList<BusinessWorkingInfo>> GetBusinessWorkingInfoByBusinessIdAsync(int businessId);
         Task<IList<BusinessWorkingInfo>> GetBusinessWorkingInfoByBusinessIdAndDateAsync(int businessId, DateTime? date);
         Task<IList<BusinessWorkingInfo>> GetBusinessWorkingInfoByBusinessIdAndBetweenDateAsync(int businessId, DateTime? startDate, DateTime? endDate);

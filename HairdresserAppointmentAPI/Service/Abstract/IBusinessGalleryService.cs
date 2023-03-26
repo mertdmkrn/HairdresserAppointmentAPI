@@ -10,7 +10,7 @@ namespace HairdresserAppointmentAPI.Service.Abstract
         Task<BusinessGallery> SaveBusinessGalleryAsync(BusinessGallery businessGallery);
         Task<IList<BusinessGallery>> SaveBusinessGalleriesAsync(List<BusinessGallery> businessGalleries, int businessId);
         Task<BusinessGallery> UpdateBusinessGalleryAsync(BusinessGallery businessGallery);
-        Task<bool> DeleteBusinessCategoryAsync(BusinessGallery businessGallery);
-        Task<bool> DeleteBusinessGalleriesAsync(List<BusinessGallery> businessGalleries);
+        Task<bool> DeleteBusinessGalleryAsync(BusinessGallery businessGallery);
+        Task<bool> DeleteBusinessGalleriesAsync(IList<BusinessGallery> businessGalleries);
     }
 }

@@ -68,7 +68,7 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             }
         }
 
-        public async Task<bool> DeleteBusinessCategoryAsync(BusinessGallery businessGallery)
+        public async Task<bool> DeleteBusinessGalleryAsync(BusinessGallery businessGallery)
         {
             using (var context = new AppointmentDBContext())
             {
@@ -78,7 +78,7 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             }
         }
 
-        public async Task<bool> DeleteBusinessGalleriesAsync(List<BusinessGallery> businessGalleries)
+        public async Task<bool> DeleteBusinessGalleriesAsync(IList<BusinessGallery> businessGalleries)
         {
             using (var context = new AppointmentDBContext())
             {

@@ -17,5 +17,6 @@ namespace HairdresserAppointmentAPI.Model
         public AppointmentStatus status { get; set; }
         public int userId { get; set; }
         public int businessId { get; set; }
+        public Business? business { get; set; }
     }
 }

@@ -10,8 +10,8 @@ namespace HairdresserAppointmentAPI.Model
         public int id { get; set; }
         public int businessId { get; set; }
         public int categoryId { get; set; }
-        public Business business { get; set; }
-        public Category category { get; set; }
+        public Business? business { get; set; }
+        public Category? category { get; set; }
 
     }
 }

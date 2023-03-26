@@ -2,11 +2,13 @@
 using HairdresserAppointmentAPI.Model;
 using HairdresserAppointmentAPI.Service.Abstract;
 using HairdresserAppointmentAPI.Service.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HairdresserAppointmentAPI.Controller
 {
     [ApiController]
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         private ICategoryService _categoryService;
@@ -182,11 +184,11 @@ namespace HairdresserAppointmentAPI.Controller
         }
 
         /// <summary>
-        /// Delete Rating
+        /// Delete Category
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        [Route("category/delete/{id}")]
+        [Route("category/delete")]
         public async Task<IActionResult> Delete(int id)
         {
             ResponseModel<bool> response = new ResponseModel<bool>();

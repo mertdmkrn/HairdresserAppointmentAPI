@@ -44,7 +44,7 @@ namespace HairdresserAppointmentAPI.Service.Concrete
             return await _servicesRepository.DeleteServicesAsync(services);
         }
 
-        public async Task<bool> DeleteServicesListAsync(List<Services> servicesList)
+        public async Task<bool> DeleteServicesListAsync(IList<Services> servicesList)
         {
             return await _servicesRepository.DeleteServicesListAsync(servicesList);
         }

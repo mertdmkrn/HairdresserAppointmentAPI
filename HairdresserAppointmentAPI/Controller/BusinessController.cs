@@ -4,11 +4,13 @@ using HairdresserAppointmentAPI.Model.CustomModel;
 using HairdresserAppointmentAPI.Model.SearchModel;
 using HairdresserAppointmentAPI.Service.Abstract;
 using HairdresserAppointmentAPI.Service.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HairdresserAppointmentAPI.Controller
 {
     [ApiController]
+    [Authorize]
     public class BusinessController : ControllerBase
     {
         private IBusinessService _businessService;
@@ -18,45 +20,6 @@ namespace HairdresserAppointmentAPI.Controller
             _businessService = new BusinessService();
         }
 
-        /// <summary>
-        /// Business Login Control
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("business/login")]
-        public async Task<IActionResult> Login(string? email, string? password)
-        {
-            ResponseModel<Business> response = new ResponseModel<Business>();
-
-            if (email.IsNullOrEmpty())
-            {
-                response.HasError = true;
-                response.ValidationErrors.Add("email", "Email boş bırakılmamalı.");
-                response.Message += "Email boş bırakılmamalı.";
-            }
-
-            if (password.IsNullOrEmpty())
-            {
-                response.HasError = true;
-                response.ValidationErrors.Add("password", "Şifre boş bırakılmamalı.");
-                response.Message += "Şifre boş bırakılmamalı.";
-            }
-
-            if (response.HasError)
-                return BadRequest(response);
-
-            response.Data = await _businessService.GetBusinessByEmailAndPasswordAsync(email, password);
-
-            if (response.Data == null)
-            {
-                response.HasError = true;
-                response.Message = "Girdiğiniz bilgilere ait kullanıcı bulunamadı.";
-                return NotFound(response);
-            }
-
-            return Ok(response);
-
-        }
         /// <summary>
         /// Get Business By Id
         /// </summary>
@@ -352,7 +315,7 @@ namespace HairdresserAppointmentAPI.Controller
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        [Route("business/delete/{id}")]
+        [Route("business/delete")]
         public async Task<IActionResult> Delete(int id)
         {
             ResponseModel<bool> response = new ResponseModel<bool>();

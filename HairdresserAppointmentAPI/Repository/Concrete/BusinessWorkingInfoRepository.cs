@@ -7,7 +7,7 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
 {
     public class BusinessWorkingInfoRepository : IBusinessWorkingInfoRepository
     {
-        public async Task<BusinessWorkingInfo> GetBusinessWorkingInfoByIdAsync(int id)
+        public async Task<BusinessWorkingInfo> GetBusinessWorkingInfoByIdAsync(long id)
         {
             using (var context = new AppointmentDBContext())
             {

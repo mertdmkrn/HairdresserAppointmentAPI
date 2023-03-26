@@ -10,6 +10,6 @@ namespace HairdresserAppointmentAPI.Service.Abstract
         Task<IList<Services>> SaveServicesListAsync(List<Services> servicesList, int businessId);
         Task<Services> UpdateServicesAsync(Services services);
         Task<bool> DeleteServicesAsync(Services services);
-        Task<bool> DeleteServicesListAsync(List<Services> servicesList);
+        Task<bool> DeleteServicesListAsync(IList<Services> servicesList);
     }
 }

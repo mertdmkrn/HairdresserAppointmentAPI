@@ -1,19 +1,27 @@
-﻿using HairdresserAppointmentAPI.Helpers;
+﻿using HairdresserAppointmentAPI.Handler.Abstract;
+using HairdresserAppointmentAPI.Handler.Concrete;
+using HairdresserAppointmentAPI.Handler.Model;
+using HairdresserAppointmentAPI.Helpers;
 using HairdresserAppointmentAPI.Model;
 using HairdresserAppointmentAPI.Service.Abstract;
 using HairdresserAppointmentAPI.Service.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HairdresserAppointmentAPI.Controller
 {
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private IUserService _userService;
+        private ITokenHandler _tokenHandler;
 
         public UserController()
         {
             _userService = new UserService();
+            _tokenHandler = new TokenHandler();
         }
 
         /// <summary>
@@ -71,125 +79,6 @@ namespace HairdresserAppointmentAPI.Controller
                 return Ok(response);
             }
 
-        }
-
-        /// <summary>
-        /// User Login Control
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("user/login")]
-        public async Task<IActionResult> Login(string? email, string? password)
-        {
-            ResponseModel<User> response = new ResponseModel<User>();
-
-            if (email.IsNullOrEmpty())
-            {
-                response.HasError = true;
-                response.ValidationErrors.Add("email", "Email boş bırakılmamalı.");
-                response.Message += "Email boş bırakılmamalı.";
-            }
-
-            if (password.IsNullOrEmpty())
-            {
-                response.HasError = true;
-                response.ValidationErrors.Add("password", "Şifre boş bırakılmamalı.");
-                response.Message += "Şifre boş bırakılmamalı.";
-            }
-
-            if (response.HasError)
-                return BadRequest(response);
-
-            response.Data = await _userService.GetUserByEmailAndPasswordAsync(email, password);
-
-            if (response.Data == null)
-            {
-                response.HasError = true;
-                response.Message = "Girdiğiniz bilgilere ait kullanıcı bulunamadı.";
-                return NotFound(response);
-            }
-
-            return Ok(response);
-        }
-
-        /// <summary>
-        /// Create New User
-        /// </summary>
-        /// <remarks>
-        /// **Sample request body:**
-        ///
-        ///     { 
-        ///        "firstName": "Mert",
-        ///        "lastName": "DEMİRKIRAN",
-        ///        "email": "mertdmkrn37@gmail.com",
-        ///        "password": "stms5581",
-        ///        "imagePath": "images/mertdemirkiran.jpg"
-        ///     }
-        ///
-        /// </remarks>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("user/save")]
-        public async Task<IActionResult> Save([FromBody] User user)
-        {
-            ResponseModel<User> response = new ResponseModel<User>();
-            try
-            {
-                if (user.email.IsNullOrEmpty())
-                {
-                    response.HasError = true;
-                    response.ValidationErrors.Add("email", "Email boş bırakılmamalı.");
-                    response.Message += "Email boş bırakılmamalı.";
-                }
-
-                if (!user.email.IsValidEmail())
-                {
-                    response.HasError = true;
-                    response.ValidationErrors.Add("email", "Geçerli bir email adresi giriniz.");
-                    response.Message += "Geçerli bir email adresi giriniz.";
-                }
-
-                if (user.password.IsNullOrEmpty())
-                {
-                    response.HasError = true;
-                    response.ValidationErrors.Add("password", "Şifre boş bırakılmamalı.");
-                    response.Message += "Şifre boş bırakılmamalı.";
-                }
-
-                if (user.password.IsNotNullOrEmpty() && user.password.Length != 8)
-                {
-                    response.HasError = true;
-                    response.ValidationErrors.Add("password", "Şifre 8 haneli olmalıdır.");
-                    response.Message += "Şifre 8 haneli olmalıdır.";
-                }
-
-                if (user.firstName.IsNullOrEmpty())
-                {
-                    response.HasError = true;
-                    response.ValidationErrors.Add("firstname", "İsim boş bırakılmamalı.");
-                    response.Message += "İsim boş bırakılmamalı.";
-                }
-
-                if (user.lastName.IsNullOrEmpty())
-                {
-                    response.HasError = true;
-                    response.ValidationErrors.Add("lastname", "Soyisim boş bırakılmamalı.");
-                    response.Message += "Soyisim boş bırakılmamalı.";
-                }
-
-                if (response.HasError)
-                    return BadRequest(response);
-
-                response.Data = await _userService.SaveUserAsync(user);
-                
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                response.HasError = true;
-                response.Message += "Kayıt yapılırken hata. Exception => " + ex.Message;
-                return Ok(response);
-            }
         }
 
         /// <summary>
@@ -261,7 +150,7 @@ namespace HairdresserAppointmentAPI.Controller
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        [Route("user/delete/{id}")]
+        [Route("user/delete")]
         public async Task<IActionResult> Delete(int id)
         {
             ResponseModel<bool> response = new ResponseModel<bool>();
