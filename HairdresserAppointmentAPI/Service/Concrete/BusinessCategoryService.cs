@@ -9,9 +9,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
     {
         private IBusinessCategoryRepository _businessCategoryRepository;
 
-        public BusinessCategoryService()
+        public BusinessCategoryService(IBusinessCategoryRepository businessCategoryRepository)
         {
-            _businessCategoryRepository = new BusinessCategoryRepository();
+            _businessCategoryRepository = businessCategoryRepository;
         }
 
         public async Task<BusinessCategory> GetBusinessCategoryByIdAsync(int id)

@@ -9,8 +9,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
     {
         private IUserRepository _userRepository;
         
-        public UserService() {
-            _userRepository = new UserRepository();
+        public UserService(IUserRepository userRepository) 
+        {
+            _userRepository = userRepository;
         }
 
         public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)

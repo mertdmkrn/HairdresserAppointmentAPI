@@ -9,9 +9,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
     {
         private ICategoryRepository _categoryRepository;
 
-        public CategoryService()
+        public CategoryService(ICategoryRepository categoryRepository)
         {
-            _categoryRepository = new CategoryRepository();
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<IList<Category>> GetCategoriesAsync()

@@ -15,9 +15,9 @@ namespace HairdresserAppointmentAPI.Controller
     {
         private IBusinessService _businessService;
 
-        public BusinessController()
+        public BusinessController(IBusinessService businessService)
         {
-            _businessService = new BusinessService();
+            _businessService = businessService;
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (id == 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("id", "Id parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("id", "Id parametresi 0' dan büyük olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 
@@ -77,7 +77,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (businessSearchModel.City.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("city", "City parametresi boş olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("city", "City parametresi boş olmalı."));
                     response.Message += "City parametresi boş olmalı.";
                 }
 
@@ -122,21 +122,21 @@ namespace HairdresserAppointmentAPI.Controller
                 if (latitude <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("latitude", "Latitude parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("latitude", "Latitude parametresi 0' dan büyük olmalı."));
                     response.Message += "Latitude parametresi 0' dan büyük olmalı.";
                 }
 
                 if (longitude <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("longitude", "Longitude parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("longitude", "Longitude parametresi 0' dan büyük olmalı."));
                     response.Message += "Longitude parametresi 0' dan büyük olmalı.";
                 }
 
                 if (distance <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("distance", "Distance parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("distance", "Distance parametresi 0' dan büyük olmalı."));
                     response.Message += "Distance parametresi 0' dan büyük olmalı.";
                 }
 
@@ -194,35 +194,35 @@ namespace HairdresserAppointmentAPI.Controller
                 if (business.email.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("email", "Email boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("email", "Email boş bırakılmamalı."));
                     response.Message += "Email boş bırakılmamalı.";
                 }
 
                 if (!business.email.IsValidEmail())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("email", "Geçerli bir email adresi giriniz.");
+                    response.ValidationErrors.Add(new ValidationError("email", "Geçerli bir email adresi giriniz."));
                     response.Message += "Geçerli bir email adresi giriniz.";
                 }
 
                 if (business.password.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("password", "Şifre boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("password", "Şifre boş bırakılmamalı."));
                     response.Message += "Şifre boş bırakılmamalı.";
                 }
 
                 if (business.password.IsNotNullOrEmpty() && business.password.Length != 8)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("password", "Şifre 8 haneli olmalıdır.");
+                    response.ValidationErrors.Add(new ValidationError("password", "Şifre 8 haneli olmalıdır."));
                     response.Message += "Şifre 8 haneli olmalıdır.";
                 }
 
                 if (business.name.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("name", "İsim boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("name", "İsim boş bırakılmamalı."));
                     response.Message += "İsim boş bırakılmamalı.";
                 }
 
@@ -272,7 +272,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (updateBusiness.name.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("name", "İsim boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("name", "İsim boş bırakılmamalı."));
                     response.Message += "İsim boş bırakılmamalı.";
                 }
 
@@ -324,7 +324,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (id == 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("id", "Id parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("id", "Id parametresi 0' dan büyük olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 

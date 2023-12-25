@@ -6,6 +6,11 @@ namespace HairdresserAppointmentAPI.Model
     [Table("Category")]
     public class Category
     {
+        public Category()
+        {
+            this.categories = new HashSet<BusinessCategory>();
+        }
+
         [Key]
         public int id { get; set; }
         public string name { get; set; }

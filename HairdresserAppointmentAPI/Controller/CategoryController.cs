@@ -13,9 +13,9 @@ namespace HairdresserAppointmentAPI.Controller
     {
         private ICategoryService _categoryService;
 
-        public CategoryController()
+        public CategoryController(ICategoryService categoryService)
         {
-            _categoryService = new CategoryService();
+            _categoryService = categoryService;
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if ((!id.HasValue || id.Value <= 0) && (name.IsNullOrEmpty()))
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("parameter", "Id veya name parametresinden biri olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("parameter", "Id veya name parametresinden biri olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 
@@ -111,7 +111,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (category.name.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("name", "Kategori isim alanı boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("name", "Kategori isim alanı boş bırakılmamalı."));
                     response.Message += "Kategori isim alanı boş bırakılmamalı.";
                 }
 
@@ -153,7 +153,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (updateCategory.name.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("name", "Kategori isim alanı boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("name", "Kategori isim alanı boş bırakılmamalı."));
                     response.Message += "Kategori isim alanı boş bırakılmamalı.";
                 }
 
@@ -197,7 +197,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (id == 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("id", "Id parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("id", "Id parametresi 0' dan büyük olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 

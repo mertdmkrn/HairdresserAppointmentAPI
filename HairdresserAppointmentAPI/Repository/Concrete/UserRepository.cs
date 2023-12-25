@@ -40,7 +40,6 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
             using (var context = new AppointmentDBContext())
             {
                 user.updateDate = DateTime.Now;
-                user.fullName = string.Join(" ", user.firstName.Trim(), user.lastName.Trim());
 
                 context.Users.Update(user);
                 await context.SaveChangesAsync();
@@ -55,9 +54,6 @@ namespace HairdresserAppointmentAPI.Repository.Concrete
                 user.password = user.password.HashString();
                 user.createDate = DateTime.Now;
                 user.updateDate = user.createDate;
-
-                if (user.fullName.IsNullOrEmpty())
-                    user.fullName = string.Join(" ", user.firstName.Trim(), user.lastName.Trim());
 
                 await context.Users.AddAsync(user);
                 await context.SaveChangesAsync();

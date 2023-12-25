@@ -18,10 +18,10 @@ namespace HairdresserAppointmentAPI.Controller
         private IUserService _userService;
         private ITokenHandler _tokenHandler;
 
-        public UserController()
+        public UserController(IUserService userService, ITokenHandler tokenHandler)
         {
-            _userService = new UserService();
-            _tokenHandler = new TokenHandler();
+            _userService = userService;
+            _tokenHandler = tokenHandler;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (id == 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("id", "Id parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("id", "Id parametresi 0' dan büyük olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 
@@ -103,18 +103,11 @@ namespace HairdresserAppointmentAPI.Controller
             ResponseModel<User> response = new ResponseModel<User>();
             try
             {
-                if (updateUser.firstName.IsNullOrEmpty())
+                if (updateUser.fullName.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("firstname", "İsim boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("fullName", "İsim boş bırakılmamalı."));
                     response.Message += "İsim boş bırakılmamalı.";
-                }
-
-                if (updateUser.lastName.IsNullOrEmpty())
-                {
-                    response.HasError = true;
-                    response.ValidationErrors.Add("lastname", "Soyisim boş bırakılmamalı.");
-                    response.Message += "Soyisim boş bırakılmamalı.";
                 }
 
                 if (response.HasError)
@@ -130,8 +123,7 @@ namespace HairdresserAppointmentAPI.Controller
                 }
 
                 user.imagePath = updateUser.imagePath;
-                user.firstName = updateUser.firstName;
-                user.lastName = updateUser.lastName;
+                user.fullName = updateUser.fullName;
 
                 response.Data = await _userService.UpdateUserAsync(user);
 
@@ -159,7 +151,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (id == 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("id", "Id parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("id", "Id parametresi 0' dan büyük olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 

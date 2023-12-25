@@ -13,9 +13,9 @@ namespace HairdresserAppointmentAPI.Controller
     {
         private IServicesService _servicesService;
 
-        public ServicesController()
+        public ServicesController(IServicesService servicesService)
         {
-            _servicesService = new ServicesService();
+            _servicesService = servicesService;
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (id <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("id", "Id parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("id", "Id parametresi 0' dan büyük olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 
@@ -75,7 +75,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (businessId <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("businessId", "BusinessId parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("businessId", "BusinessId parametresi 0' dan büyük olmalı."));
                     response.Message += "BusinessId parametresi 0' dan büyük olmalı.";
                 }
 
@@ -115,21 +115,21 @@ namespace HairdresserAppointmentAPI.Controller
                 if (services.name.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("name", "Hizmet isim alanı boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("name", "Hizmet isim alanı boş bırakılmamalı."));
                     response.Message += "Hizmet isim alanı boş bırakılmamalı.";
                 }
 
                 if (services.price < 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("price", "Fiyat alanı 0' dan küçük olmamalıdır.");
+                    response.ValidationErrors.Add(new ValidationError("price", "Fiyat alanı 0' dan küçük olmamalıdır."));
                     response.Message += "Fiyat alanı 0' dan küçük olmamalıdır.";
                 }
 
                 if (services.businessId <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("businessId", "BusinessId parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("businessId", "BusinessId parametresi 0' dan büyük olmalı."));
                     response.Message += "BusinessId parametresi 0' dan büyük olmalı.";
                 }
 
@@ -182,14 +182,14 @@ namespace HairdresserAppointmentAPI.Controller
                 if (businessId <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("businessId", "BusinessId parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("businessId", "BusinessId parametresi 0' dan büyük olmalı."));
                     response.Message += "BusinessId parametresi 0' dan büyük olmalı.";
                 }
 
                 if (services.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("services", "Hizmet listesi boş olmalalıdır.");
+                    response.ValidationErrors.Add(new ValidationError("services", "Hizmet listesi boş olmalalıdır."));
                     response.Message += "Hizmet listesi boş olmalalıdır.";
                 }
 
@@ -233,7 +233,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (updateServices.id <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("Id", "Id parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("Id", "Id parametresi 0' dan büyük olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 
@@ -278,7 +278,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (id <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("id", "Id parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("id", "Id parametresi 0' dan büyük olmalı."));
                     response.Message += "Id parametresi 0' dan büyük olmalı.";
                 }
 
@@ -320,7 +320,7 @@ namespace HairdresserAppointmentAPI.Controller
                 if (businessId <= 0)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("businessId", "BusinessId parametresi 0' dan büyük olmalı.");
+                    response.ValidationErrors.Add(new ValidationError("businessId", "BusinessId parametresi 0' dan büyük olmalı."));
                     response.Message += "BusinessId parametresi 0' dan büyük olmalı.";
                 }
 

@@ -12,9 +12,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
     {
         private IBusinessRepository _businessRepository;
 
-        public BusinessService()
+        public BusinessService(IBusinessRepository businessRepository)
         {
-            _businessRepository = new BusinessRepository();
+            _businessRepository = businessRepository;
         }
 
         public async Task<IList<BusinessListModel>> GetBusinessByCityAsync(string city, double? latitude, double? longitude, int? page, int? take)

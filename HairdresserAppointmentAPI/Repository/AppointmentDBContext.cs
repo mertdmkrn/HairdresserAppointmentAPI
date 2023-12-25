@@ -66,13 +66,6 @@ namespace HairdresserAppointmentAPI.Repository
             {
                 entity.HasKey(e => e.id);
 
-
-                entity.Property(e => e.firstName)
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.lastName)
-                    .HasMaxLength(100);
-
                 entity.Property(e => e.fullName)
                     .HasMaxLength(200);
 

@@ -585,5 +585,17 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:HairdresserAppointmentAPI.Migrations.MigrationV1">
+            <inheritdoc />
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Migrations.MigrationV1.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Migrations.MigrationV1.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:HairdresserAppointmentAPI.Migrations.MigrationV1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

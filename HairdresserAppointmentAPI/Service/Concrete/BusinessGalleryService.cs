@@ -9,9 +9,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
     {
         private IBusinessGalleryRepository _businessGalleryRepository;
 
-        public BusinessGalleryService()
+        public BusinessGalleryService(IBusinessGalleryRepository businessGalleryRepository)
         {
-            _businessGalleryRepository = new BusinessGalleryRepository();
+            _businessGalleryRepository = businessGalleryRepository;
         }
 
         public async Task<bool> DeleteBusinessGalleryAsync(BusinessGallery businessGallery)

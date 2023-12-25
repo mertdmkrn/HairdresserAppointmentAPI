@@ -9,9 +9,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
     {
         private IServicesRepository _servicesRepository;
 
-        public ServicesService()
+        public ServicesService(IServicesRepository servicesRepository)
         {
-            _servicesRepository = new ServicesRepository();
+            _servicesRepository = servicesRepository;
         }
 
         public async Task<Services> GetServicesByIdAsync(int id)

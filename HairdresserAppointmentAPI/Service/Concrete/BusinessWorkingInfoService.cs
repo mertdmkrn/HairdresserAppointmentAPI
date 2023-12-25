@@ -9,9 +9,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
     {
         private IBusinessWorkingInfoRepository _businessWorkingInfoRepository;
 
-        public BusinessWorkingInfoService()
+        public BusinessWorkingInfoService(IBusinessWorkingInfoRepository businessWorkingInfoRepository)
         {
-            _businessWorkingInfoRepository = new BusinessWorkingInfoRepository();
+            _businessWorkingInfoRepository = businessWorkingInfoRepository;
         }
 
         public async Task<IList<BusinessWorkingInfo>> GetBusinessWorkingInfoByBusinessIdAndBetweenDateAsync(int businessId, DateTime? startDate, DateTime? endDate)

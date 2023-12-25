@@ -22,11 +22,11 @@ namespace HairdresserAppointmentAPI.Controller
         private ITokenHandler _tokenHandler;
         private readonly IMailHandler _mailHandler;
 
-        public LoginController(IMailHandler mailHandler)
+        public LoginController(IUserService userService, IBusinessService businessService, ITokenHandler tokenHandler, IMailHandler mailHandler)
         {
-            _userService = new UserService();
-            _businessService = new BusinessService();
-            _tokenHandler = new TokenHandler();
+            _userService = userService;
+            _businessService = businessService;
+            _tokenHandler = tokenHandler;
             _mailHandler = mailHandler;
         }
 
@@ -44,14 +44,14 @@ namespace HairdresserAppointmentAPI.Controller
             if (email.IsNullOrEmpty())
             {
                 response.HasError = true;
-                response.ValidationErrors.Add("email", "Email boş bırakılmamalı.");
+                response.ValidationErrors.Add(new ValidationError("email", "Email boş bırakılmamalı."));
                 response.Message += "Email boş bırakılmamalı.";
             }
 
             if (password.IsNullOrEmpty())
             {
                 response.HasError = true;
-                response.ValidationErrors.Add("password", "Şifre boş bırakılmamalı.");
+                response.ValidationErrors.Add(new ValidationError("password", "Şifre boş bırakılmamalı."));
                 response.Message += "Şifre boş bırakılmamalı.";
             }
 
@@ -99,14 +99,14 @@ namespace HairdresserAppointmentAPI.Controller
             if (email.IsNullOrEmpty())
             {
                 response.HasError = true;
-                response.ValidationErrors.Add("email", "Email boş bırakılmamalı.");
+                response.ValidationErrors.Add(new ValidationError("email", "Email boş bırakılmamalı."));
                 response.Message += "Email boş bırakılmamalı.";
             }
 
             if (password.IsNullOrEmpty())
             {
                 response.HasError = true;
-                response.ValidationErrors.Add("password", "Şifre boş bırakılmamalı.");
+                response.ValidationErrors.Add(new ValidationError("password", "Şifre boş bırakılmamalı."));
                 response.Message += "Şifre boş bırakılmamalı.";
             }
 
@@ -147,7 +147,7 @@ namespace HairdresserAppointmentAPI.Controller
             if (key.IsNullOrEmpty())
             {
                 response.HasError = true;
-                response.ValidationErrors.Add("key", "Key boş bırakılmamalı.");
+                response.ValidationErrors.Add(new ValidationError("key", "Key boş bırakılmamalı."));
                 response.Message += "Key boş bırakılmamalı.";
             }
 
@@ -208,43 +208,36 @@ namespace HairdresserAppointmentAPI.Controller
                 if (user.email.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("email", "Email boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("email", "Email boş bırakılmamalı."));
                     response.Message += "Email boş bırakılmamalı.";
                 }
 
                 if (!user.email.IsValidEmail())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("email", "Geçerli bir email adresi giriniz.");
+                    response.ValidationErrors.Add(new ValidationError("email", "Geçerli bir email adresi giriniz."));
                     response.Message += "Geçerli bir email adresi giriniz.";
                 }
 
                 if (user.password.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("password", "Şifre boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("password", "Şifre boş bırakılmamalı."));
                     response.Message += "Şifre boş bırakılmamalı.";
                 }
 
                 if (user.password.IsNotNullOrEmpty() && user.password.Length != 8)
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("password", "Şifre 8 haneli olmalıdır.");
+                    response.ValidationErrors.Add(new ValidationError("password", "Şifre 8 haneli olmalıdır."));
                     response.Message += "Şifre 8 haneli olmalıdır.";
                 }
 
-                if (user.firstName.IsNullOrEmpty())
+                if (user.fullName.IsNullOrEmpty())
                 {
                     response.HasError = true;
-                    response.ValidationErrors.Add("firstname", "İsim boş bırakılmamalı.");
+                    response.ValidationErrors.Add(new ValidationError("fullName", "İsim boş bırakılmamalı."));
                     response.Message += "İsim boş bırakılmamalı.";
-                }
-
-                if (user.lastName.IsNullOrEmpty())
-                {
-                    response.HasError = true;
-                    response.ValidationErrors.Add("lastname", "Soyisim boş bırakılmamalı.");
-                    response.Message += "Soyisim boş bırakılmamalı.";
                 }
 
                 if (response.HasError)

@@ -9,8 +9,9 @@ namespace HairdresserAppointmentAPI.Service.Concrete
     {
         private IRatingRepository _ratingRepository;
         
-        public RatingService() {
-            _ratingRepository = new RatingRepository();
+        public RatingService(IRatingRepository ratingRepository) 
+        {
+            _ratingRepository = ratingRepository;
         }
 
         public async Task<Rating> GetRatingByIdAsync(int id)
